@@ -3,6 +3,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -42,6 +43,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.dagger:hilt-android:2.44.2'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
@@ -49,10 +51,16 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
     annotationProcessor 'androidx.room:room-compiler:2.4.3'
+    annotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
 
     kapt 'androidx.room:room-compiler:2.4.3'
+    kapt "com.google.dagger:hilt-compiler:2.44.2"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    testAnnotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
+    testImplementation 'com.google.dagger:hilt-android-testing:2.44.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestAnnotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
+    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.44.2'
 }
