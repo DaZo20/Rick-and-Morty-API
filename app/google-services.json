@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:136801292659:android:03ebf3166315f0d2a53506",
+        "mobilesdk_app_id": "1:136801292659:android:31746d0e7d19c017a53506",
         "android_client_info": {
-          "package_name": "da.zo.rickandmoryapi"
+          "package_name": "da.zo.rickandmortyapi"
         }
       },
       "oauth_client": [
         {
-          "client_id": "136801292659-f4mnc3ae0f014ol7ak9h4k5g7sl5bj5p.apps.googleusercontent.com",
+          "client_id": "136801292659-eb1c8lljjhpr8m5tgokqpkuqnn1s1bsj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "da.zo.rickandmoryapi",
+            "package_name": "da.zo.rickandmortyapi",
             "certificate_hash": "e2db56a6a37175dbaa1d27886f08c665bf13970b"
           }
         },
