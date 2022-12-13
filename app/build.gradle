@@ -56,9 +56,12 @@ dependencies {
 
     kapt 'androidx.room:room-compiler:2.4.3'
     kapt "com.google.dagger:hilt-compiler:2.44.2"
+    kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0'
 
     testImplementation 'junit:junit:4.13.2'
+    testImplementation "org.mockito:mockito-core:4.9.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'org.mockito:mockito-core:4.9.0'
     testAnnotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
     testImplementation 'com.google.dagger:hilt-android-testing:2.44.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
