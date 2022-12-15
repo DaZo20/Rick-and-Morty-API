@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Color Scheme for Rick and Morty -->
+    <color name="light_green">#bada44</color>
+    <color name="dark_green">#204348</color>
+    <color name="green">#61864d</color>
+    <color name="greenish_blue">#3794a5 </color>
+    <color name="light_greenish_blue">#44a0ac</color>
+    <color name="dark_greenish_blue">#448c86</color>
+    <color name="blue">#44b4cc</color>
+    <color name="light_blue">#44b4c4</color>
 </resources>
