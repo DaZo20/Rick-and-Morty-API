@@ -1,9 +1,10 @@
 package da.zo.rickandmortyapi.login.data.di
 
-import da.zo.rickandmortyapi.login.data.datasource.FirebaseAuthDataSource
+import da.zo.rickandmortyapi.common.data.datasource.FirebaseAuthDataSource
 import da.zo.rickandmortyapi.login.data.datasource.LoginDataSource
 import da.zo.rickandmortyapi.login.data.repository.RickAndMortyLoginRepository
 import da.zo.rickandmortyapi.login.domain.LoginDomainLayerContract
+import da.zo.rickandmortyapi.register.data.datasource.RegisterDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
