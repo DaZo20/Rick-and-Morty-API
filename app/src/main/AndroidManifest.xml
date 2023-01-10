@@ -3,16 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".RickAndMortyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:name=".RickAndMortyApplication"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RickAndMortyAPI"
         tools:targetApi="31">
+        <activity
+            android:name=".register.presentation.view.RegisterActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".login.presentation.view.LoginActivity"
             android:exported="true">
