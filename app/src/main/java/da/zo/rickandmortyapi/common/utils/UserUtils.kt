@@ -1,4 +1,6 @@
-package da.zo.rickandmortyapi.common.domain
+package da.zo.rickandmortyapi.common.utils
 
-class UserUtils {
-}
+@JvmInline
+value class Email(val value: String)
+@JvmInline
+value class Password(val value: String)
