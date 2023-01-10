@@ -1,10 +1,10 @@
 package da.zo.rickandmortyapi.login.domain.usecase
 
 import android.nfc.FormatException
+import da.zo.rickandmortyapi.common.utils.Email
+import da.zo.rickandmortyapi.common.utils.Password
 import da.zo.rickandmortyapi.login.domain.LoginDomainLayerContract
-import da.zo.rickandmortyapi.login.domain.model.Email
 import da.zo.rickandmortyapi.login.domain.model.LoginUser
-import da.zo.rickandmortyapi.login.domain.model.Password
 import da.zo.rickandmortyapi.login.domain.utils.isValid
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

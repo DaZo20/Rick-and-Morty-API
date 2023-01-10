@@ -1,8 +1,9 @@
 package da.zo.rickandmortyapi.login.domain
 
-import da.zo.rickandmortyapi.login.domain.model.Email
+import da.zo.rickandmortyapi.common.utils.Email
+import da.zo.rickandmortyapi.common.utils.Password
 import da.zo.rickandmortyapi.login.domain.model.LoginUser
-import da.zo.rickandmortyapi.login.domain.model.Password
+
 
 interface LoginDomainLayerContract {
     interface PresentationLayer {

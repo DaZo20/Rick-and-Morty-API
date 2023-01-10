@@ -2,10 +2,10 @@ package da.zo.rickandmortyapi.login.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import da.zo.rickandmortyapi.common.utils.Email
+import da.zo.rickandmortyapi.common.utils.Password
 import da.zo.rickandmortyapi.login.domain.LoginDomainLayerContract
-import da.zo.rickandmortyapi.login.domain.model.Email
 import da.zo.rickandmortyapi.login.domain.model.LoginUser
-import da.zo.rickandmortyapi.login.domain.model.Password
 import da.zo.rickandmortyapi.login.domain.usecase.LoginUserWithEmailAndPassUC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +24,7 @@ class LoginViewModel @Inject constructor(
         get() = _loginUser.asStateFlow()
     private val _loginUser: MutableStateFlow<LoginUser?> = MutableStateFlow(null)
 
-    fun onLoginOptionSelected(email: Email, password: Password) {
+    fun onLoginOptionSelected(email: Email, password: Password) =
         viewModelScope.launch {
             loginUserWithEmailAndPassUC.invoke(email, password).onSuccess { user ->
                 _loginUser.update { user }
@@ -32,5 +32,5 @@ class LoginViewModel @Inject constructor(
                 th.printStackTrace()
             }
         }
-    }
+
 }
