@@ -5,56 +5,72 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import da.zo.rickandmortyapi.R
+import da.zo.rickandmortyapi.characters.domain.model.Characters
+import da.zo.rickandmortyapi.characters.presentation.viewmodel.CharactersViewModel
+import da.zo.rickandmortyapi.databinding.FragmentCharacterBinding
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CharacterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class CharacterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    @Inject
+    lateinit var characterViewModel: CharactersViewModel
+    private var characterFragmentBinding: FragmentCharacterBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_character, container, false)
+    ): View = FragmentCharacterBinding.inflate(inflater, container, false).also {
+        characterFragmentBinding = it
+        initViews()
+    }.root
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        characterFragmentBinding = null
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CharacterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CharacterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                characterViewModel.characters.collect { ch ->
+                    if (ch != null) {
+                        loadCharacters(data = ch)
+                    }
                 }
             }
+        }
+    }
+    private fun loadCharacters(data: Characters) {
+        (characterFragmentBinding?.rvCharactersData?.adapter as? CharacterAdapter)?.updateData(newData = data.results)
+    }
+
+    private fun initViews() {
+        with(characterFragmentBinding?.rvCharactersData) {
+            this?.layoutManager = LinearLayoutManager(context)
+            this?.adapter = CharacterAdapter()
+            this?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager: LinearLayoutManager? = recyclerView.layoutManager as LinearLayoutManager?
+                    if(layoutManager?.findLastCompletelyVisibleItemPosition() == recyclerView.adapter?.itemCount?.minus(1)) {
+                        characterViewModel.onEndOfScrollReached()
+                    }
+                }
+
+            })
+        }
+    }
+    companion object {
+        fun newInstance(): CharacterFragment = CharacterFragment().apply { arguments = Bundle() }
     }
 }
