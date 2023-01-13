@@ -50,7 +50,7 @@ class RegisterActivity : AppCompatActivity() {
         if (result != null) {
             navigateToMainActivity()
         }else {
-            //Toast.makeText(this,"Error al registrarse", Toast.LENGTH_SHORT).show()
+            println("Something went wrong")
         }
 
     private fun navigateToMainActivity() =
