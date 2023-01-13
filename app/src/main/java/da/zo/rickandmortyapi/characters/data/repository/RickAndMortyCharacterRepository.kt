@@ -5,6 +5,7 @@ import da.zo.rickandmortyapi.characters.data.utils.toCharacters
 import da.zo.rickandmortyapi.characters.data.utils.toCharactersEntity
 import da.zo.rickandmortyapi.characters.domain.CharacterDomainLayerContract
 import da.zo.rickandmortyapi.characters.domain.model.Characters
+import da.zo.rickandmortyapi.characters.domain.model.Character
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Singleton
@@ -16,9 +17,10 @@ import javax.inject.Singleton
 @Singleton
 object RickAndMortyCharacterRepository : CharacterDomainLayerContract.DataLayer.CharacterRepository {
 
-    private var nextPage: Int = 0
+    private var nextPage: Int = 1
     lateinit var charactersRemoteDataSource: CharactersDataSource.Remote
     lateinit var charactersLocalDataSource: CharactersDataSource.Local
+
 
     override suspend fun getAllCharactersList(): Result<Characters> =
         try {
@@ -33,6 +35,7 @@ object RickAndMortyCharacterRepository : CharacterDomainLayerContract.DataLayer.
         } catch (e: Exception) {
             Result.success(charactersLocalDataSource.fetchCharacterList().toCharacters())
         }
+
 
     override suspend fun getCharactersNextPage(): Result<Characters> =
         try {

@@ -30,6 +30,7 @@ class RickAndMortyCharacterDataSource @Inject constructor(
     private val roomDatabaseInstance: ApplicationDatabase
 ) : CharactersDataSource.Remote, CharactersDataSource.Local {
 
+
     override suspend fun getAllCharactersListResponse(): Result<CharactersDto?> =
         retrofitInstance.create(CharactersService::class.java).getAllCharactersList()
             .runCatching { body() }
@@ -39,14 +40,14 @@ class RickAndMortyCharacterDataSource @Inject constructor(
             .runCatching { body() }
 
 
-    override suspend fun saveCharacterList(list: List<CharacterEntity>) =
-        roomDatabaseInstance.characterDao().insertAll(*list.toTypedArray())
 
+    override suspend fun saveCharacterList(list: List<CharacterEntity>) {
+
+        roomDatabaseInstance.characterDao().insertAll(*list.toTypedArray())
+    }
 
     override suspend fun fetchCharacterList(): List<CharacterEntity> = roomDatabaseInstance.characterDao().getAll()
 
-
     override suspend fun fetchCharacterNextPage(page: Int): List<CharacterEntity> =
         roomDatabaseInstance.characterDao().getCharactersByPage(page = page)
-
 }
