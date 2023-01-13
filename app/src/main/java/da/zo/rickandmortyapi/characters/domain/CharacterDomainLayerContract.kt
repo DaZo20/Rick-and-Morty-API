@@ -1,6 +1,7 @@
 package da.zo.rickandmortyapi.characters.domain
 
 import da.zo.rickandmortyapi.characters.domain.model.Characters
+import da.zo.rickandmortyapi.characters.domain.model.Character
 
 //
 // Created by DaZo20 on 11/01/2023.
