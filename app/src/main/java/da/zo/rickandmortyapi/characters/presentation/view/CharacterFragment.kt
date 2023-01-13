@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import da.zo.rickandmortyapi.R
 import da.zo.rickandmortyapi.characters.domain.model.Characters
 import da.zo.rickandmortyapi.characters.presentation.viewmodel.CharactersViewModel
 import da.zo.rickandmortyapi.databinding.FragmentCharacterBinding
@@ -23,6 +22,7 @@ class CharacterFragment : Fragment() {
 
     @Inject
     lateinit var characterViewModel: CharactersViewModel
+
     private var characterFragmentBinding: FragmentCharacterBinding? = null
 
     override fun onCreateView(

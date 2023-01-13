@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import da.zo.rickandmortyapi.characters.domain.CharacterDomainLayerContract
 import da.zo.rickandmortyapi.characters.domain.model.Characters
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,13 +41,14 @@ class CharactersViewModel @Inject constructor(
         }
     }
 
-    fun onEndOfScrollReached() {
+    fun onEndOfScrollReached(){
         viewModelScope.launch {
-            getAllCharactersUc().onSuccess { characters ->
+            getCharactersNextPageUc().onSuccess { characters ->
                 _characters.value = characters
             }.onFailure { ch ->
                 ch.printStackTrace()
             }
         }
     }
+
 }
