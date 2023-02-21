@@ -2,7 +2,9 @@ package da.zo.rickandmortyapi.characters.domain.di
 
 import da.zo.rickandmortyapi.characters.domain.CharacterDomainLayerContract
 import da.zo.rickandmortyapi.characters.domain.model.Characters
+import da.zo.rickandmortyapi.characters.domain.model.Character
 import da.zo.rickandmortyapi.characters.domain.usecase.GetAllCharactersUc
+import da.zo.rickandmortyapi.characters.domain.usecase.GetCharacterByIdUc
 import da.zo.rickandmortyapi.characters.domain.usecase.GetCharacterNextPageUc
 import dagger.Module
 import dagger.Provides
@@ -27,4 +29,7 @@ class CharactersDomainDependencies {
     @Named("get_characters_next_page")
     fun providesGetCharactersNextPageUc(getNexPageUc: GetCharacterNextPageUc) : @JvmSuppressWildcards CharacterDomainLayerContract.PresentationLayer.UseCase<Characters> = getNexPageUc
 
+    @Provides
+    @Named("get_characters_by_id")
+    fun providesGetCharacterById(getCharacterById: GetCharacterByIdUc) : @JvmSuppressWildcards CharacterDomainLayerContract.PresentationLayer.UseCase<Character> = getCharacterById
 }
