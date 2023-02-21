@@ -46,11 +46,11 @@ dependencies {
 
     implementation 'io.coil-kt:coil:2.2.2'
     implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.room:room-ktx:2.4.3'
+    implementation 'androidx.room:room-ktx:2.5.0'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.firebase:firebase-auth'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.dagger:hilt-android:2.44.2'
@@ -65,20 +65,20 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.0')
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
-    annotationProcessor 'androidx.room:room-compiler:2.4.3'
+    annotationProcessor 'androidx.room:room-compiler:2.5.0'
     annotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
 
-    kapt 'androidx.room:room-compiler:2.4.3'
+    kapt 'androidx.room:room-compiler:2.5.0'
     kapt "com.google.dagger:hilt-compiler:2.44.2"
     kapt 'org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.mockito:mockito-core:4.9.0"
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'org.mockito:mockito-core:4.9.0'
     testAnnotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
     testImplementation 'com.google.dagger:hilt-android-testing:2.44.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestAnnotationProcessor 'com.google.dagger:hilt-compiler:2.44.2'
     androidTestImplementation  'com.google.dagger:hilt-android-testing:2.44.2'
 }
