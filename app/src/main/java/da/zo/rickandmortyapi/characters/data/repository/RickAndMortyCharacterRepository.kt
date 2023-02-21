@@ -1,11 +1,14 @@
 package da.zo.rickandmortyapi.characters.data.repository
 
+import android.widget.TextView
+import da.zo.rickandmortyapi.R
 import da.zo.rickandmortyapi.characters.data.datasource.CharactersDataSource
+import da.zo.rickandmortyapi.characters.data.utils.toCharacter
 import da.zo.rickandmortyapi.characters.data.utils.toCharacters
 import da.zo.rickandmortyapi.characters.data.utils.toCharactersEntity
 import da.zo.rickandmortyapi.characters.domain.CharacterDomainLayerContract
-import da.zo.rickandmortyapi.characters.domain.model.Characters
 import da.zo.rickandmortyapi.characters.domain.model.Character
+import da.zo.rickandmortyapi.characters.domain.model.Characters
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Singleton
@@ -15,7 +18,8 @@ import javax.inject.Singleton
 //
 
 @Singleton
-object RickAndMortyCharacterRepository : CharacterDomainLayerContract.DataLayer.CharacterRepository {
+object RickAndMortyCharacterRepository :
+    CharacterDomainLayerContract.DataLayer.CharacterRepository {
 
     private var nextPage: Int = 1
     lateinit var charactersRemoteDataSource: CharactersDataSource.Remote
@@ -27,7 +31,11 @@ object RickAndMortyCharacterRepository : CharacterDomainLayerContract.DataLayer.
             charactersRemoteDataSource.getAllCharactersListResponse().map { dto ->
                 dto?.toCharacters()?.also {
                     withContext(Dispatchers.IO) {
-                        charactersLocalDataSource.saveCharacterList(list = dto.toCharactersEntity(page = nextPage))
+                        charactersLocalDataSource.saveCharacterList(
+                            list = dto.toCharactersEntity(
+                                page = nextPage
+                            )
+                        )
                         nextPage++
                     }
                 } ?: charactersLocalDataSource.fetchCharacterList().toCharacters()
@@ -42,37 +50,71 @@ object RickAndMortyCharacterRepository : CharacterDomainLayerContract.DataLayer.
             charactersRemoteDataSource.getCharactersNextPage(page = nextPage).map { dto ->
                 dto?.toCharacters()?.also {
                     withContext(Dispatchers.IO) {
-                        charactersLocalDataSource.saveCharacterList(list = dto.toCharactersEntity(page = nextPage))
+                        charactersLocalDataSource.saveCharacterList(
+                            list = dto.toCharactersEntity(
+                                page = nextPage
+                            )
+                        )
                         nextPage++
                     }
-                } ?:run {
+                } ?: run {
                     withContext(Dispatchers.IO) {
-                        charactersLocalDataSource.fetchCharacterNextPage(page = nextPage).toCharacters()
-                            .also { if (it.results.isNotEmpty()) { nextPage++}
+                        charactersLocalDataSource.fetchCharacterNextPage(page = nextPage)
+                            .toCharacters()
+                            .also {
+                                if (it.results.isNotEmpty()) {
+                                    nextPage++
+                                }
                             }
                     }
                 }
             }
         } catch (e: Exception) {
             Result.success(
-                withContext(Dispatchers.IO){
+                withContext(Dispatchers.IO) {
                     charactersLocalDataSource.fetchCharacterNextPage(page = nextPage).toCharacters()
-                        .also { if (it.results.isNotEmpty()) { nextPage++}
+                        .also {
+                            if (it.results.isNotEmpty()) {
+                                nextPage++
+                            }
                         }
                 }
             )
         }
 
-    override suspend fun getCharacterById(id: Int): Result<Character> {
-        TODO("Not yet implemented")
-    }
+//    override suspend fun getCharacterById(): Result<Character> =
+//        try {
+//        charactersRemoteDataSource.getCharactersById(id = ).map { ch ->
+//            ch.toCharacter()
+//        }
+//    }catch (e: Exception) {
+//        Result.success(
+//            withContext(Dispatchers.IO) {
+//                charactersLocalDataSource.fetchCharacterById(id = id).toCharacter()
+//            }
+//        )
+//    }
 
-    override suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCharactersByStatus(status: String): Result<Characters> {
-        TODO("Not yet implemented")
-    }
+//    override suspend fun getCharacterById(id: Int): Result<Character> =
+//        try {
+//            charactersRemoteDataSource.getCharactersById(id = id).map { ch ->
+//                ch.toCharacter()
+//            }
+//        }catch (e: Exception) {
+//            Result.success(
+//                withContext(Dispatchers.IO) {
+//                    charactersLocalDataSource.fetchCharacterById(id = id).toCharacter()
+//                }
+//            )
+//        }
+//
+//
+//    override suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters> {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override suspend fun getCharactersByStatus(status: String): Result<Characters> {
+//        TODO("Not yet implemented")
+//    }
 
 }
