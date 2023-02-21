@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CharacterFragment : Fragment(), OnQueryTextListener {
+class CharacterFragment : Fragment() {
 
     @Inject
     lateinit var characterViewModel: CharactersViewModel
@@ -85,30 +85,18 @@ class CharacterFragment : Fragment(), OnQueryTextListener {
         fun newInstance(): CharacterFragment = CharacterFragment().apply { arguments = Bundle() }
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
+//    override fun onQueryTextSubmit(query: String?): Boolean {
+//
 //        if (query != null) {
-//            characterAdapter?.filteredData(query)
-//            Log.i("ADAAAPTEEER: ", characterAdapter.toString())
+//            CharacterAdapter().filteredData(query)
 //        }
-        Log.i("ADAAAPTEEER: ", query.toString())
-        if (query != null) {
-            CharacterAdapter().filteredData(query)
-            Log.i("ADAAAPTEEER: ", CharacterAdapter().filteredData(query).toString())
-        }
-        return false
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        Log.i("ADAAAPTEEER: ", newText.toString())
-        if (newText != null) {
-            CharacterAdapter().filteredData(newText)
-            Log.i("ADAAAPTEEER: ", CharacterAdapter().filteredData(newText).toString())
-        }
-
+//        return false
+//    }
+//
+//    override fun onQueryTextChange(newText: String?): Boolean {
 //        if (newText != null) {
-//            characterAdapter?.filteredData(newText)
-//            Log.i("ADAAAPTEEER: ", characterAdapter.toString())
+//            CharacterAdapter().filteredData(newText)
 //        }
-        return false
-    }
+//        return false
+//    }
 }

@@ -14,5 +14,4 @@ object LoginDomainDependencies {
 
     @Provides
     fun providesLoginUser(usecase: LoginUserWithEmailAndPassUC) : @JvmSuppressWildcards LoginDomainLayerContract.PresentationLayer.UseCase<LoginUser> = usecase
-
 }
