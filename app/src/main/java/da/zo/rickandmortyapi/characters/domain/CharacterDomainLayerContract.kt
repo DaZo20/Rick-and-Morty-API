@@ -19,11 +19,11 @@ interface CharacterDomainLayerContract {
 
             suspend fun getCharactersNextPage(): Result<Characters>
 
-//            suspend fun getCharacterById(id: Int): Result<Character>
-//
-//            suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters>
-//
-//            suspend fun getCharactersByStatus(status: String): Result<Characters>
+            suspend fun getCharacterById(id: Int): Result<Character>
+
+            suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters>
+
+            suspend fun getCharactersByStatus(status: String): Result<Characters>
         }
     }
 }

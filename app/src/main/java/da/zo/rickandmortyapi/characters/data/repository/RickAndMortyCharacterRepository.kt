@@ -1,7 +1,5 @@
 package da.zo.rickandmortyapi.characters.data.repository
 
-import android.widget.TextView
-import da.zo.rickandmortyapi.R
 import da.zo.rickandmortyapi.characters.data.datasource.CharactersDataSource
 import da.zo.rickandmortyapi.characters.data.utils.toCharacter
 import da.zo.rickandmortyapi.characters.data.utils.toCharacters
@@ -95,26 +93,26 @@ object RickAndMortyCharacterRepository :
 //        )
 //    }
 
-//    override suspend fun getCharacterById(id: Int): Result<Character> =
-//        try {
-//            charactersRemoteDataSource.getCharactersById(id = id).map { ch ->
-//                ch.toCharacter()
-//            }
-//        }catch (e: Exception) {
-//            Result.success(
-//                withContext(Dispatchers.IO) {
-//                    charactersLocalDataSource.fetchCharacterById(id = id).toCharacter()
-//                }
-//            )
-//        }
-//
-//
-//    override suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters> {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun getCharactersByStatus(status: String): Result<Characters> {
-//        TODO("Not yet implemented")
-//    }
+    override suspend fun getCharacterById(id: Int): Result<Character> =
+        try {
+            charactersRemoteDataSource.getCharactersById(id = id).map { ch ->
+                ch.toCharacter()
+            }
+        }catch (e: Exception) {
+            Result.success(
+                withContext(Dispatchers.IO) {
+                    charactersLocalDataSource.fetchCharacterById(id = id).toCharacter()
+                }
+            )
+        }
+
+
+    override suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCharactersByStatus(status: String): Result<Characters> {
+        TODO("Not yet implemented")
+    }
 
 }
