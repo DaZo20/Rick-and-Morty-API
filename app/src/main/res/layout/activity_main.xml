@@ -4,15 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/randm_wallpaper"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+<!--    <SearchView-->
+<!--        android:id="@+id/sv_search"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:closeIcon="@drawable/ic_baseline_close_24"-->
+<!--        android:searchHintIcon="@drawable/ic_baseline_search_24"-->
+<!--        android:searchIcon="@drawable/ic_baseline_search_24"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/fragment_view"-->
+
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:name="da.zo.rickandmortyapi.characters.presentation.view.CharacterFragment"
+        tools:layout="@layout/fragment_character"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:background="@color/black"
+        app:elevation="10dp"
+        app:itemIconTint="@color/purple"
+        app:itemTextColor="@color/radioactive_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:menu="@menu/bottom_nav_menu"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
