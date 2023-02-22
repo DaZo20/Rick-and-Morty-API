@@ -24,10 +24,6 @@ class CharacterFragment : Fragment() {
     @Inject
     lateinit var characterViewModel: CharactersViewModel
     private var characterFragmentBinding: FragmentCharacterBinding? = null
-//    private var data: MutableList<Character> = mutableListOf()
-//    private lateinit var adapter: CharacterAdapter
-//
-//    private lateinit var viewHolder: CharacterAdapter.CharactersViewHolder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

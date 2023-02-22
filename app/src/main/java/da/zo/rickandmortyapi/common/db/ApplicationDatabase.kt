@@ -13,7 +13,7 @@ import da.zo.rickandmortyapi.episodes.data.db.EpisodesDao
 //
 
 @Database(
-    entities = [CharacterEntity::class, EpisodeEntity::class], version = 1
+    entities = [CharacterEntity::class, EpisodeEntity::class], version = 2
 )
 @TypeConverters(ReferenceListConverter::class)
 abstract class ApplicationDatabase : RoomDatabase() {

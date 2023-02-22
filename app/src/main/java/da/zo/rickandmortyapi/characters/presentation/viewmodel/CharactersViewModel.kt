@@ -32,10 +32,10 @@ class CharactersViewModel @Inject constructor(
 
     private var _characters: MutableStateFlow<Characters?> = MutableStateFlow(null)
 
-    val characterID: StateFlow<Character?>
-        get() = _characterID.asStateFlow()
-
-    private var _characterID: MutableStateFlow<Character?> = MutableStateFlow(null)
+//    val characterID: StateFlow<Character?>
+//        get() = _characterID.asStateFlow()
+//
+//    private var _characterID: MutableStateFlow<Character?> = MutableStateFlow(null)
 
 
     init {
@@ -62,12 +62,12 @@ class CharactersViewModel @Inject constructor(
         }
     }
 
-    fun searchCharacterById() =
-        viewModelScope.launch {
-            getCharacterByIdUc().onSuccess { characterID ->
-                _characterID.value = characterID
-            }.onFailure { ch ->
-                ch.printStackTrace()
-            }
-        }
+//    fun searchCharacterById() =
+//        viewModelScope.launch {
+//            getCharacterByIdUc().onSuccess { characterID ->
+//                _characterID.value = characterID
+//            }.onFailure { ch ->
+//                ch.printStackTrace()
+//            }
+//        }
 }
