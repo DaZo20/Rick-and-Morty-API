@@ -10,6 +10,7 @@ import com.google.android.material.navigation.NavigationBarView.OnItemSelectedLi
 import da.zo.rickandmortyapi.characters.presentation.view.CharacterFragment
 import da.zo.rickandmortyapi.characters.presentation.viewmodel.CharactersViewModel
 import da.zo.rickandmortyapi.databinding.ActivityMainBinding
+import da.zo.rickandmortyapi.episodes.presentation.view.EpisodesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     lateinit var mainBinding: ActivityMainBinding
     private val characterViewModel: CharactersViewModel by viewModels()
     private val charactersFragment: Fragment by lazy { CharacterFragment.newInstance() }
-    // private val episodesFragment: Fragment by lazy { EpisodesFragment.newInstance() }
+    private val episodesFragment: Fragment by lazy { EpisodesFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
                 return true
             }
             R.id.navigation_episodes -> {
-//                replaceWithEpisodesFragment()
+                replaceWithEpisodesFragment()
                 return true
             }
         }
@@ -62,8 +63,8 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     private fun replaceWithEpisodesFragment() {
-        //supportFragmentManager.beginTransaction()
-        //  .replace(R.id.fragment_view, episodesFragment).commit()
+        supportFragmentManager.beginTransaction()
+          .replace(R.id.fragment_view, episodesFragment).commit()
     }
 }
 
