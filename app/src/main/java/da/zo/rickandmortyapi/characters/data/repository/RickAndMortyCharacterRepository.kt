@@ -29,11 +29,7 @@ object RickAndMortyCharacterRepository :
             charactersRemoteDataSource.getAllCharactersListResponse().map { dto ->
                 dto?.toCharacters()?.also {
                     withContext(Dispatchers.IO) {
-                        charactersLocalDataSource.saveCharacterList(
-                            list = dto.toCharactersEntity(
-                                page = nextPage
-                            )
-                        )
+                        charactersLocalDataSource.saveCharacterList(list = dto.toCharactersEntity(page = nextPage))
                         nextPage++
                     }
                 } ?: charactersLocalDataSource.fetchCharacterList().toCharacters()
