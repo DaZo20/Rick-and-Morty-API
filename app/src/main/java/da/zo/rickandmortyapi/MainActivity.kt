@@ -2,14 +2,19 @@ package da.zo.rickandmortyapi
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.replace
 import com.google.android.material.navigation.NavigationBarView.OnItemSelectedListener
 import da.zo.rickandmortyapi.characters.presentation.view.CharacterFragment
+import da.zo.rickandmortyapi.characters.presentation.view.FilterCharactersFragment
 import da.zo.rickandmortyapi.characters.presentation.viewmodel.CharactersViewModel
 import da.zo.rickandmortyapi.databinding.ActivityMainBinding
+import da.zo.rickandmortyapi.databinding.FragmentCharacterBinding
 import da.zo.rickandmortyapi.episodes.presentation.view.EpisodesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +25,7 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     private val characterViewModel: CharactersViewModel by viewModels()
     private val charactersFragment: Fragment by lazy { CharacterFragment.newInstance() }
     private val episodesFragment: Fragment by lazy { EpisodesFragment.newInstance() }
+    private val filterFragment: Fragment by lazy { FilterCharactersFragment.newInstance() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,14 +64,15 @@ class MainActivity : AppCompatActivity(), OnItemSelectedListener {
     }
 
     private fun replaceWithCharactersFragment() {
-        supportFragmentManager.beginTransaction()
+        supportFragmentManager.beginTransaction().addToBackStack("characters")
             .replace(R.id.fragment_view, charactersFragment).commit()
     }
 
     private fun replaceWithEpisodesFragment() {
-        supportFragmentManager.beginTransaction()
+        supportFragmentManager.beginTransaction().addToBackStack("episodes")
           .replace(R.id.fragment_view, episodesFragment).commit()
     }
+
 }
 
 
