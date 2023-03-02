@@ -7,6 +7,7 @@ import da.zo.rickandmortyapi.characters.data.utils.toCharactersEntity
 import da.zo.rickandmortyapi.characters.domain.CharacterDomainLayerContract
 import da.zo.rickandmortyapi.characters.domain.model.Character
 import da.zo.rickandmortyapi.characters.domain.model.Characters
+import da.zo.rickandmortyapi.databinding.FragmentCharacterBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Singleton
@@ -20,6 +21,8 @@ object RickAndMortyCharacterRepository :
     CharacterDomainLayerContract.DataLayer.CharacterRepository {
 
     private var nextPage: Int = 1
+
+    //    private val name: String = ""
     lateinit var charactersRemoteDataSource: CharactersDataSource.Remote
     lateinit var charactersLocalDataSource: CharactersDataSource.Local
 
@@ -29,7 +32,11 @@ object RickAndMortyCharacterRepository :
             charactersRemoteDataSource.getAllCharactersListResponse().map { dto ->
                 dto?.toCharacters()?.also {
                     withContext(Dispatchers.IO) {
-                        charactersLocalDataSource.saveCharacterList(list = dto.toCharactersEntity(page = nextPage))
+                        charactersLocalDataSource.saveCharacterList(
+                            list = dto.toCharactersEntity(
+                                page = nextPage
+                            )
+                        )
                         nextPage++
                     }
                 } ?: charactersLocalDataSource.fetchCharacterList().toCharacters()
@@ -76,39 +83,62 @@ object RickAndMortyCharacterRepository :
             )
         }
 
-//    override suspend fun getCharacterById(): Result<Character> =
-//        try {
-//        charactersRemoteDataSource.getCharactersById(id = ).map { ch ->
-//            ch.toCharacter()
-//        }
-//    }catch (e: Exception) {
-//        Result.success(
-//            withContext(Dispatchers.IO) {
-//                charactersLocalDataSource.fetchCharacterById(id = id).toCharacter()
-//            }
-//        )
-//    }
-
-    override suspend fun getCharacterById(id: Int): Result<Character> =
+    override suspend fun getCharactersByName(name: String): Result<Characters> =
         try {
-            charactersRemoteDataSource.getCharactersById(id = id).map { ch ->
-                ch.toCharacter()
-            }
-        }catch (e: Exception) {
-            Result.success(
-                withContext(Dispatchers.IO) {
-                    charactersLocalDataSource.fetchCharacterById(id = id).toCharacter()
+            withContext(Dispatchers.IO) {
+                charactersRemoteDataSource.getCharactersByName(name).map { dto ->
+                    dto.toCharacters()
                 }
-            )
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.IO) {
+                Result.success(charactersLocalDataSource.fetchCharacterByName(name).toCharacters())
+            }
         }
 
+    override suspend fun getCharactersByStatus(status: String): Result<Characters> =
+        try {
+            withContext(Dispatchers.IO) {
+                charactersRemoteDataSource.getCharactersByStatus(status).map { dto ->
+                    dto.toCharacters()
+                }
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.IO) {
+                Result.success(
+                    charactersLocalDataSource.fetchCharactersByStatus(status).toCharacters()
+                )
+            }
+        }
 
-    override suspend fun getMultipleCharactersById(ids: List<Int>): Result<Characters> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCharactersByGender(gender: String): Result<Characters> =
+        try {
+            withContext(Dispatchers.IO) {
+                charactersRemoteDataSource.getCharactersByGender(gender).map{ dto ->
+                    dto.toCharacters()
+                }
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.IO) {
+                Result.success(charactersLocalDataSource.fetchCharactersByGender(gender).toCharacters())
+            }
+        }
 
-    override suspend fun getCharactersByStatus(status: String): Result<Characters> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCharactersByStatusAndGender(
+        status: String,
+        gender: String
+    ): Result<Characters> =
+        try {
+            withContext(Dispatchers.IO) {
+                charactersRemoteDataSource.getCharactersByStatusAndGender(status, gender).map { dto ->
+                    dto.toCharacters()
+                }
+            }
+        }catch (e: Exception) {
+            withContext(Dispatchers.IO) {
+                Result.success(charactersLocalDataSource.fetchCharactersByStatusAndGender(status, gender).toCharacters())
+            }
+        }
+
 
 }

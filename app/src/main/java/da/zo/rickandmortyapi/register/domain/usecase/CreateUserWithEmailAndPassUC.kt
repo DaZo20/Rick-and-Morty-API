@@ -1,6 +1,7 @@
 package da.zo.rickandmortyapi.register.domain.usecase
 
 import android.nfc.FormatException
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import da.zo.rickandmortyapi.common.utils.Email
@@ -22,7 +23,7 @@ class CreateUserWithEmailAndPassUC @Inject constructor(
     override suspend fun invoke(email: Email, password: Password): Result<RegisterUser> =
         withContext(Dispatchers.IO) {
             if (registerBinding?.emailEt?.text.toString().isNotEmpty() && registerBinding?.userEt?.text.toString().isNotEmpty()) {
-                if (registerBinding?.registerPasswordEt?.text.toString().equals(registerBinding?.registerConfirmPasswordEt?.text.toString())) {
+                if (registerBinding?.registerPasswordEt?.text.toString() == registerBinding?.registerConfirmPasswordEt?.text.toString()) {
                     registerRepository.registerUser(email, password)
                 } else {
                     Result.failure(FormatException("Passwords must match"))

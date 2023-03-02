@@ -13,9 +13,29 @@ import retrofit2.http.Query
 //
 
 interface CharactersService {
+
     @GET("character/")
     suspend fun getAllCharactersList(@Query("page") page: Int = 1): Response<CharactersDto?>
 
-    @GET("character/{character_id}")
-    suspend fun getSingleCharacter(@Path ("id") id: Int): Response<Character?>
+    @GET("character/")
+    suspend fun getCharactersByName(@Query("name") name: String): Response<CharactersDto?>
+
+    @GET("character/")
+    suspend fun getCharactersByStatusAndGender(
+        @Query("status") status: String,
+        @Query("gender") gender: String,
+        @Query("page") page: Int = 1): Response<CharactersDto?>
+
+    @GET("character/")
+    suspend fun getCharactersByStatus(
+        @Query("status") status: String,
+        @Query("page") page: Int = 1): Response<CharactersDto?>
+
+    @GET("character/")
+    suspend fun getCharactersByGender(
+        @Query("gender") gender: String,
+        @Query("page") page: Int = 1): Response<CharactersDto?>
+
+
+
 }
