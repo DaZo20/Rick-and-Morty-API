@@ -4,12 +4,11 @@ import da.zo.rickandmortyapi.characters.domain.CharacterDomainLayerContract
 import da.zo.rickandmortyapi.characters.domain.model.Characters
 import da.zo.rickandmortyapi.characters.domain.model.Character
 import da.zo.rickandmortyapi.characters.domain.usecase.GetAllCharactersUc
-import da.zo.rickandmortyapi.characters.domain.usecase.GetCharacterByIdUc
 import da.zo.rickandmortyapi.characters.domain.usecase.GetCharacterNextPageUc
+import da.zo.rickandmortyapi.characters.domain.usecase.GetCharactersByNameUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 
@@ -30,6 +29,7 @@ class CharactersDomainDependencies {
     fun providesGetCharactersNextPageUc(getNexPageUc: GetCharacterNextPageUc) : @JvmSuppressWildcards CharacterDomainLayerContract.PresentationLayer.UseCase<Characters> = getNexPageUc
 
     @Provides
-    @Named("get_characters_by_id")
-    fun providesGetCharacterById(getCharacterById: GetCharacterByIdUc) : @JvmSuppressWildcards CharacterDomainLayerContract.PresentationLayer.UseCase<Character> = getCharacterById
+    @Named("get_characters_by_name")
+    fun providesGetCharactersByNameUc(getByName: GetCharactersByNameUC) : @JvmSuppressWildcards CharacterDomainLayerContract.PresentationLayer.UseCase<Characters> = getByName
+
 }

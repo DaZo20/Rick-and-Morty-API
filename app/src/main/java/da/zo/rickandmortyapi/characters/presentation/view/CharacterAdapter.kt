@@ -33,32 +33,6 @@ class CharacterAdapter(
         notifyDataSetChanged()
     }
 
-
-//    fun filteredData(query: String) {
-//        if (query.isEmpty()){
-//            data.clear()
-//            data.addAll(data)
-//        }else {
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                val collection: MutableList<Character> =
-//                data.stream().filter{ character ->
-//                    character.name.lowercase().contains(query.lowercase())
-//                }.collect(Collectors.toList())
-//                data.clear()
-//                data.addAll(collection)
-//            } else {
-////                data.clear()
-//                data.map { c ->
-//                    if (c.name.lowercase().contains(query.lowercase())){
-//                        data.add(c)
-//                    }
-//                }
-//            }
-//        }
-//        notifyDataSetChanged()
-//    }
-
-
     inner class CharactersViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val imgProfile: ImageView by lazy { itemView.findViewById(R.id.img_profile) }
