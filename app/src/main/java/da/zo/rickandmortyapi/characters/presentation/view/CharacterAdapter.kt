@@ -15,7 +15,7 @@ import da.zo.rickandmortyapi.characters.domain.model.Character
 
 class CharacterAdapter(
      var data: MutableList<Character> = mutableListOf()
-//     var filteredData: MutableList<Character> = mutableListOf()
+
 ) : RecyclerView.Adapter<CharacterAdapter.CharactersViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharactersViewHolder {
