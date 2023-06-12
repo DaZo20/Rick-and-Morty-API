@@ -11,7 +11,6 @@
     <img src="images/login_activity.jpg" width="211" height="423" />
     <img src="images/register_activity.jpg" width="211" height="423"  />
     <img src="images/characters_fragment.jpg" width="211" height="423"  />
-    <img src="images/episodes_fragment.jpg" width="211" height="423"  />
   </p>
 
 # Technologies used in this app
@@ -26,4 +25,4 @@
 
 
 # Credits
-- [The Rick and Morty API](https://rickandmortyapi.com/)
+- [The Rick and Morty API](https://developers.themoviedb.org/3/getting-started/introduction)

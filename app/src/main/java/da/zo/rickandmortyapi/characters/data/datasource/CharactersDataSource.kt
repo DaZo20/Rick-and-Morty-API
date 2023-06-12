@@ -63,7 +63,7 @@ class RickAndMortyCharacterDataSource @Inject constructor(
             .runCatching { body() }
 
     override suspend fun getCharactersByStatusAndGender(status: String, gender: String): Result<CharactersDto?> =
-        retrofitInstance.create(CharactersService::class.java).getCharactersByStatusAndGender(status, gender)
+        retrofitInstance.create(CharactersService::class.java). getCharactersByStatusAndGender(status, gender)
             .runCatching { body() }
 
 

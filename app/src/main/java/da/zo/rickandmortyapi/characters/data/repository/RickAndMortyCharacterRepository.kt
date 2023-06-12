@@ -22,7 +22,6 @@ object RickAndMortyCharacterRepository :
 
     private var nextPage: Int = 1
 
-    //    private val name: String = ""
     lateinit var charactersRemoteDataSource: CharactersDataSource.Remote
     lateinit var charactersLocalDataSource: CharactersDataSource.Local
 
