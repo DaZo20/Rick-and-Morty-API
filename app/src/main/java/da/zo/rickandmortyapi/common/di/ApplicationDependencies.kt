@@ -31,7 +31,8 @@ object UtilsModule {
 
     @Singleton
     @Provides
-    fun providesRoomDataBaseInstance(@ApplicationContext applicationContext: Context) : ApplicationDatabase = Room.databaseBuilder(
+    fun providesRoomDataBaseInstance(@ApplicationContext applicationContext: Context) : ApplicationDatabase =
+        Room.databaseBuilder(
         applicationContext,
         ApplicationDatabase::class.java,"rick-and-morty-db"
     ).build()
