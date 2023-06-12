@@ -4,22 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/randm_wallpaper"
     tools:context=".MainActivity">
 
-
-<!--    <SearchView-->
-<!--        android:id="@+id/sv_search"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:closeIcon="@drawable/ic_baseline_close_24"-->
-<!--        android:searchHintIcon="@drawable/ic_baseline_search_24"-->
-<!--        android:searchIcon="@drawable/ic_baseline_search_24"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/fragment_view"-->
-
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_view"
         android:layout_width="match_parent"

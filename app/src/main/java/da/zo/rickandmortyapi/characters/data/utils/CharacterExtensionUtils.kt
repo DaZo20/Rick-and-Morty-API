@@ -18,7 +18,7 @@ import da.zo.rickandmortyapi.characters.domain.model.Origin
 
 const val DEFAULT_INT = 1
 const val DEFAULT_STRING = ""
- val DEFAULT_LIST_STRING: List<String> = listOf("")
+val DEFAULT_LIST_STRING: List<String> = listOf("")
 
 fun CharactersDto?.toCharacters() : Characters =
     Characters(results = this?.results?.toCharacterList() ?: emptyList())
@@ -93,7 +93,8 @@ fun OriginDto.toBo() : Origin = Origin(name = name, url = url)
 fun LocationDto.toBo() : Location = Location(name = name, url = url)
 
 
-fun CharactersDto.toCharactersEntity(page: Int): List<CharacterEntity> = results.map { dto ->
+fun CharactersDto.toCharactersEntity(page: Int): List<CharacterEntity> =
+    results.map { dto ->
     with(dto) {
         CharacterEntity(
             id = id,

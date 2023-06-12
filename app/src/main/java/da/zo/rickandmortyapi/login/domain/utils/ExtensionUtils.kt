@@ -1,5 +1,6 @@
 package da.zo.rickandmortyapi.login.domain.utils
 
+import da.zo.rickandmortyapi.common.utils.ConfirmPassword
 import da.zo.rickandmortyapi.common.utils.Email
 import da.zo.rickandmortyapi.common.utils.Password
 import da.zo.rickandmortyapi.login.data.model.LoginUserDto
@@ -27,5 +28,6 @@ fun RegisterUserDto.toRegisterUser() =
     RegisterUser(
         name = name ?: DEFAULT_STRING_VALUE,
         email = Email(value =  email ?: DEFAULT_STRING_VALUE),
-        password = Password(value = DEFAULT_STRING_VALUE )
+        password = Password(value = DEFAULT_STRING_VALUE ),
+        confirmPassword = ConfirmPassword(value = DEFAULT_STRING_VALUE)
     )

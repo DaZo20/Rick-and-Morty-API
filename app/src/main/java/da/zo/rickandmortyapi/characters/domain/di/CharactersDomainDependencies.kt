@@ -5,7 +5,10 @@ import da.zo.rickandmortyapi.characters.domain.model.Characters
 import da.zo.rickandmortyapi.characters.domain.model.Character
 import da.zo.rickandmortyapi.characters.domain.usecase.GetAllCharactersUc
 import da.zo.rickandmortyapi.characters.domain.usecase.GetCharacterNextPageUc
+import da.zo.rickandmortyapi.characters.domain.usecase.GetCharactersByGenderUc
 import da.zo.rickandmortyapi.characters.domain.usecase.GetCharactersByNameUC
+import da.zo.rickandmortyapi.characters.domain.usecase.GetCharactersByStatusAndGenderUc
+import da.zo.rickandmortyapi.characters.domain.usecase.GetCharactersByStatusUc
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,6 +33,18 @@ class CharactersDomainDependencies {
 
     @Provides
     @Named("get_characters_by_name")
-    fun providesGetCharactersByNameUc(getByName: GetCharactersByNameUC) : @JvmSuppressWildcards CharacterDomainLayerContract.PresentationLayer.UseCase<Characters> = getByName
+    fun providesGetCharactersByNameUc(getByName: GetCharactersByNameUC) : GetCharactersByNameUC = getByName
+
+    @Provides
+    @Named("get_characters_by_status")
+    fun providesGetCharactersByStatusUc(getByStatus: GetCharactersByStatusUc) : GetCharactersByStatusUc = getByStatus
+
+    @Provides
+    @Named("get_characters_by_gender")
+    fun providesGetCharactersByGenderUc(getByGender: GetCharactersByGenderUc) : GetCharactersByGenderUc = getByGender
+
+    @Provides
+    @Named("get_characters_by_gender_and_status")
+    fun providesGetCharactersByStatusAndGenderUc(getByGenderAndStatus: GetCharactersByStatusAndGenderUc) : GetCharactersByStatusAndGenderUc = getByGenderAndStatus
 
 }

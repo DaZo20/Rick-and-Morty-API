@@ -43,9 +43,11 @@ class EpisodesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    episodesBinding?.episodesCenterProgressBar?.visibility = View.VISIBLE
                 episodeViewModel.episodes.collect { ep ->
                     if (ep != null) {
                         loadEpisodes(data = ep)
+                        episodesBinding?.episodesCenterProgressBar?.visibility = View.GONE
                     }
                 }
             }

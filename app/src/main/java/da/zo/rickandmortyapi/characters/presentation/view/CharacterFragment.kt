@@ -2,8 +2,13 @@ package da.zo.rickandmortyapi.characters.presentation.view
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.ProgressBar
 import android.widget.SearchView
+import android.widget.Spinner
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
@@ -18,8 +23,10 @@ import da.zo.rickandmortyapi.characters.presentation.viewmodel.CharactersViewMod
 import da.zo.rickandmortyapi.databinding.FragmentCharacterBinding
 import da.zo.rickandmortyapi.databinding.FragmentFilterBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,13 +46,15 @@ class CharacterFragment : Fragment() {
         filterBinding?.root
         initViews()
         characterFragmentBinding?.filterButton?.setOnClickListener {
-            (filterFragment as BottomSheetDialogFragment).show(parentFragmentManager,"filter")
+            (filterFragment as BottomSheetDialogFragment).show(parentFragmentManager, "filter")
         }
 
     }.root
 
+
     override fun onDestroyView() {
         super.onDestroyView()
+        (characterFragmentBinding?.rvCharactersData?.adapter as? CharacterAdapter)?.data?.clear()
         characterFragmentBinding = null
     }
 
@@ -54,8 +63,11 @@ class CharacterFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 characterViewModel.characters.collect { ch ->
+                    characterFragmentBinding?.charactersCenterProgressBar?.visibility = View.VISIBLE
                     if (ch != null) {
                         loadCharacters(data = ch)
+                        characterFragmentBinding?.charactersCenterProgressBar?.visibility =
+                            View.GONE
                     }
                 }
             }
@@ -90,7 +102,9 @@ class CharacterFragment : Fragment() {
                             1
                         )
                     ) {
+                        characterFragmentBinding?.charactersProgressBar?.visibility = View.VISIBLE
                         characterViewModel.onEndOfScrollReached()
+                        characterFragmentBinding?.charactersProgressBar?.visibility = View.GONE
                     }
                 }
             })
@@ -102,10 +116,11 @@ class CharacterFragment : Fragment() {
             SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                val adapter = characterFragmentBinding?.rvCharactersData?.adapter as CharacterAdapter
+                val adapter =
+                    characterFragmentBinding?.rvCharactersData?.adapter as CharacterAdapter
                 adapter.data.clear()
                 characterViewModel.fetchCharactersByName(query.toString())
-                characterFragmentBinding?.svSearch?.setQuery("",false)
+                characterFragmentBinding?.svSearch?.setQuery("", false)
                 characterFragmentBinding?.svSearch?.clearFocus()
                 return true
             }
@@ -118,14 +133,18 @@ class CharacterFragment : Fragment() {
 
 
     private fun getBundleOfFilterFragment() {
-        parentFragmentManager.setFragmentResultListener("filter_key",this, FragmentResultListener { requestKey, result ->
+        parentFragmentManager.setFragmentResultListener(
+            "filter_key",
+            this
+        ) { requestKey, result ->
             val statusAnd = result.getString("status_and")
             val genderAnd = result.getString("gender_and")
             val status = result.getString("status")
             val gender = result.getString("gender")
 
 
-            val adapter = characterFragmentBinding?.rvCharactersData?.adapter as CharacterAdapter
+            val adapter =
+                characterFragmentBinding?.rvCharactersData?.adapter as CharacterAdapter
             adapter.data.clear()
 
             when {
@@ -135,15 +154,17 @@ class CharacterFragment : Fragment() {
                         genderAnd.toString()
                     )
                 }
+
                 status != null -> {
                     characterViewModel.fetchCharactersByStatus(status.toString())
                 }
+
                 gender != null -> {
                     characterViewModel.fetchCharactersByGender(gender.toString())
                 }
             }
 
-        })
+        }
 
 
     }
