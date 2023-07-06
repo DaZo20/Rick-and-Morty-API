@@ -30,6 +30,7 @@ class CharacterAdapter(
 
     fun updateData(newData: List<Character>){
         data.addAll(newData.toMutableList())
+        //notifyItemInserted(data.size - 1)
         notifyDataSetChanged()
     }
 
