@@ -25,4 +25,4 @@
 
 
 # Credits
-- [The Rick and Morty API](https://developers.themoviedb.org/3/getting-started/introduction)
+- [The Rick and Morty API](https://rickandmortyapi.com/)
